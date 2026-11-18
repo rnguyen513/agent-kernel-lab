@@ -5,7 +5,7 @@ import argparse, gzip, hashlib, io, json, re, sys, tarfile
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from akl import __version__
-TOP={'akl.py','README.md','AGENTS.md','LICENSE','THIRD_PARTY_NOTICES.md','SECURITY.md','CONTRIBUTING.md','CHANGELOG.md','.gitignore','media.lock.json'}
+TOP={'quickstart.sh','cleanup.sh','akl.py','README.md','AGENTS.md','LICENSE','THIRD_PARTY_NOTICES.md','SECURITY.md','CONTRIBUTING.md','CHANGELOG.md','.gitignore','media.lock.json'}
 DIRS={'akl','guest','examples','docs','tests','tools','.github'}
 EXT={'.py','.ps1','.sh','.json','.md','.txt','.yml','.yaml','.xml','.in','.c','.h','.cpp','.hpp','.inf','.inx','.rc','.vcxproj','.filters','.props','.targets','.sln'}
 SKIP={'__pycache__','.pytest_cache'}

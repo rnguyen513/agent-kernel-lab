@@ -1,7 +1,7 @@
 """Diagnostics, bounded shutdown, storage watchdog and agent handoff."""
 from pathlib import Path
 import json, os, re, shutil, time
-from .core import LabError, require_storage, root, run, timestamp, write_json, private_dir
+from .core import LabError, require_storage, root, run, timestamp, write_json, private_dir, observer_lock
 from .guest import Guest
 from .vm import Lab
 
@@ -35,7 +35,13 @@ def stop(c,timeout=600):
 
 
 def watch(c,interval=5):
-    root();lab=Lab(c);lab.owned()
+    root()
+    with observer_lock(c):
+        return _watch(c,interval)
+
+
+def _watch(c,interval=5):
+    lab=Lab(c);lab.owned()
     boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip()
     # journal cursor avoids reinterpreting historical failures as a new incident.
     cursor_text=run('journalctl','-k','-b','-n','0','--show-cursor','--no-pager')

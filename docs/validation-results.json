@@ -4,7 +4,7 @@
   "release": "0.1.0",
   "status": "research-preview",
   "python_tests": {
-    "passed": 36,
+    "passed": 62,
     "failed": 0,
     "includes_real_qcow2_snapshot_restore": true
   },
@@ -34,5 +34,11 @@
   "extracted_archive_tests_passed": 35,
   "extracted_cli_init_smoke_test": "passed",
   "publication_scan": "No original user/mount identifiers or private-key material; runtime directories excluded",
-  "ci_results_url": "https://github.com/rnguyen513/agent-kernel-lab/actions"
+  "ci_results_url": "https://github.com/rnguyen513/agent-kernel-lab/actions",
+  "entrypoints": {
+    "quickstart_tests": "mocked orchestration and real disposable config-only files",
+    "cleanup_tests": "mocked libvirt and real disposable directory deletion",
+    "real_vm_teardown_executed": false,
+    "fresh_quickstart_windows_install_executed": false
+  }
 }

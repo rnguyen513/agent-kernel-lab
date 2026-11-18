@@ -77,6 +77,7 @@ def main(argv=None):
             c=Config(d,a.config.resolve());c.validate()
             c.workspace.mkdir(parents=True,exist_ok=True,mode=0o700)
             if any(c.workspace.iterdir()):raise LabError('Use a new empty workspace')
+            write_json(c.workspace/'.akl-workspace.json',{'instance_id':d['instance_id']})
             write_json(a.config,d);result={'config':str(a.config.resolve()),'next':'Configure all three media paths and SHA256; run doctor and media-verify.'}
         else:
             c=Config.load(a.config)

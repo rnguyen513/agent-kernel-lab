@@ -16,6 +16,10 @@ Completed on the reference Ubuntu 22.04 host:
 
 The exact test count and archive digest are recorded in `docs/validation-results.json` and the release SHA256 sidecar. No fresh Windows installation or full VM restore was executed through the new portable package during this packaging task. The existing lab was left powered off. The new code does not import or take ownership of it.
 
+## Quickstart and cleanup additions
+
+The host suite also covers configuration-only setup with no host commands, existing-config preservation, setup resumption, entry points launched outside the checkout, and blocked teardown for wrong identities, shared storage/bridges, active guests/watchdogs and nested mounts. Deletion tests use fake libvirt responses and disposable directories, including a symlink whose external target must survive. Cleanup has not been executed against a real lab; quickstart has not performed a fresh Windows installation here.
+
 ## Historical guest/runtime evidence
 
 The original lab independently verified the following before extraction into this framework. These are historical acceptance observations, not claims that the new portable installer has already reproduced them:

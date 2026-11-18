@@ -78,3 +78,19 @@ def event(c, action, result):
         owner=c.workspace.stat();os.fchown(fd,owner.st_uid,owner.st_gid)
     with os.fdopen(fd,'a') as f:
         f.write(json.dumps({'time':timestamp(),'action':action,'result':result})+'\n')
+
+
+@contextlib.contextmanager
+def observer_lock(c, create=True):
+    """Watchdog lifetime lock: teardown refuses while a supervised watcher is active."""
+    path=c.state/'watchdog.lock'
+    if not create and not path.exists():
+        yield
+        return
+    if create:private_dir(c.state)
+    fd=os.open(path,os.O_RDWR|os.O_NOFOLLOW|(os.O_CREAT if create else 0),0o600)
+    try:
+        try:fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError:raise LabError('A watchdog is active; stop its terminal before cleanup or starting another watcher')
+        yield
+    finally:os.close(fd)

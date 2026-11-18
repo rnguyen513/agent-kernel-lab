@@ -1,5 +1,7 @@
 # Installation
 
+For guided setup, use `bash quickstart.sh` and follow [QUICKSTART.md](QUICKSTART.md). The commands below are the manual equivalent.
+
 ## Host and media
 
 Run `bash tools/install-host.sh` from an ordinary user account. Use scoped sudo for host lifecycle commands, not a root agent. The dependency script installs no graphical VM viewer. Use the distro `/usr/bin/python3` so apt-installed `libvirt` and `PIL` modules are visible.

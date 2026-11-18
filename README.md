@@ -25,6 +25,25 @@ flowchart LR
     C --> S[Mounted storage: disks + paired recovery]
 ```
 
+## Quick start
+
+```sh
+git clone https://github.com/rnguyen513/agent-kernel-lab.git
+cd agent-kernel-lab
+bash quickstart.sh
+```
+
+The interactive wizard collects paths and media, records hashes, checks dependencies and guides provisioning. Re-run the same command to continue Windows installation or start an existing instance. Supply your Windows/EWDK/OpenSSH downloads; see [the quick-start guide](docs/QUICKSTART.md). Use `--configure-only` to prepare configuration without sudo or VM changes.
+
+To remove a selected instance later:
+
+```sh
+bash cleanup.sh          # Preview owned resources
+bash cleanup.sh --delete # Require the instance UUID before deleting
+```
+
+Cleanup includes the instance's backups, credentials and runtime files. It preserves the checkout, shared host packages and downloads outside the instance. Read [cleanup scope and recovery](docs/CLEANUP.md) before deletion.
+
 ## Start here
 
 Use an x86-64 Linux host with KVM and a dedicated mounted ext4/XFS storage volume. The reference host is Ubuntu 22.04 with Python 3.10, libvirt 8.0 and QEMU 6.2. Plan for at least 32 GiB of host RAM. Defaults allocate 24 GiB of guest RAM and 230 GiB of virtual disks; provisioning requires at least 300 GiB free. More space is needed for full backups, dumps and checkpoint growth.

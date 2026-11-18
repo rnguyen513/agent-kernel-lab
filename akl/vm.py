@@ -56,6 +56,7 @@ class Lab:
     def domain(self,role):return ET.fromstring(self.virsh('dumpxml',self.c.name(role),'--inactive'))
     def state(self,role):return self.virsh('domstate',self.c.name(role)).strip()
     def owned(self):
+        if (self.c.state/'cleanup-in-progress.json').exists():raise LabError('Cleanup has started; finish teardown instead of operating this instance')
         mount_info=require_storage(self.c)
         owner=json.loads((self.c.storage/'.akl-owner.json').read_text())
         if owner.get('instance_id')!=self.c.data['instance_id'] or owner.get('mount_uuid')!=mount_info.get('uuid'):raise LabError('Storage instance or filesystem UUID mismatch')
