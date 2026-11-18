@@ -38,6 +38,26 @@ class Configuration(Fixture):
         self.c.data['lab_id']='research';self.c.data['subnet']='10.99.12.0/24';self.c.data['media']['openssh']={'sha256':'a'*64}
         for p in (ROOT/'guest').glob('*.ps1'):
             text=render_script(self.c,p.read_text());self.assertNotIn('@@',text,p.name);self.assertNotIn('192.168.231.1',text,p.name)
+    def test_guest_renderer_runs_without_linux_modules(self):
+        # Reproduce Windows' missing host modules while executing the actual CLI.
+        output=self.base/'portable-guest'
+        code="""
+import builtins,runpy,sys
+original_import=builtins.__import__
+def portable_import(name,*args,**kwargs):
+    if name.split('.')[0] in ('fcntl','pwd','grp','resource'):
+        raise ModuleNotFoundError('Windows does not provide '+name)
+    return original_import(name,*args,**kwargs)
+builtins.__import__=portable_import
+script=sys.argv[1]
+sys.argv=sys.argv[1:]
+runpy.run_path(script,run_name='__main__')
+"""
+        result=subprocess.run([sys.executable,'-c',code,str(ROOT/'tools/render-guest.py'),'--output',str(output)],capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+        self.assertEqual(json.loads(result.stdout)['rendered'],19)
+        self.assertNotIn('@@',(output/'Bootstrap.ps1').read_text())
+
     def test_private_atomic_json_and_lock(self):
         write_json(self.c.state/'private.json',{'test':1});self.assertEqual((self.c.state/'private.json').stat().st_mode&0o777,0o600)
         with lock(self.c):

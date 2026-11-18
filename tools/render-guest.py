@@ -4,7 +4,7 @@ from pathlib import Path
 import argparse, json, sys
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from akl.config import Config,example
-from akl.guest import render_script
+from akl.templates import render_script
 p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
 c=Config(example(),Path('/unused/config.json'))
 c.data['media']['openssh']={'sha256':json.loads((ROOT/'media.lock.json').read_text())['openssh']['sha256']}

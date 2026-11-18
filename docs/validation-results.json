@@ -4,7 +4,7 @@
   "release": "0.1.0",
   "status": "research-preview",
   "python_tests": {
-    "passed": 35,
+    "passed": 36,
     "failed": 0,
     "includes_real_qcow2_snapshot_restore": true
   },
@@ -23,7 +23,7 @@
     "rendered_helpers_parsed": 19,
     "parser": "7.4.6 Linux",
     "parser_archive_sha256": "6f6015203c47806c5cc444c19d8ed019695e610fbd948154264bf9ca8e157561",
-    "windows_5_1_ci_executed": false
+    "windows_5_1_ci_executed_at_initial_packaging": false
   },
   "example_source_matches_historical_tested_tree": true,
   "portable_fresh_install_executed": false,
@@ -33,5 +33,6 @@
   "limitations_document": "VALIDATION.md",
   "extracted_archive_tests_passed": 35,
   "extracted_cli_init_smoke_test": "passed",
-  "publication_scan": "No original user/mount identifiers or private-key material; runtime directories excluded"
+  "publication_scan": "No original user/mount identifiers or private-key material; runtime directories excluded",
+  "ci_results_url": "https://github.com/rnguyen513/agent-kernel-lab/actions"
 }

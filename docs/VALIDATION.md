@@ -10,7 +10,8 @@ Completed on the reference Ubuntu 22.04 host:
 - Recovery tests confirming a corrupt second guest prevents rollback creation or image mutation, including when a bundle's hash manifest was recomputed after editing.
 - Real QEMU integration: create an 8 MiB qcow2, write pattern A, checkpoint, overwrite with pattern B, restore, verify pattern A and check image structure.
 - `virt-install --print-xml 1 --dry-run` against libvirt 8.0, followed by `virt-xml-validate` for generated dev/target domains and isolated/NAT networks. No VM definition or startup was performed for these checks.
-- Parsing all 19 rendered guest PowerShell helpers with official PowerShell 7.4.6 on Linux, whose archive was checked against the published SHA256. This checks syntax, not Windows cmdlet/runtime behavior. CI additionally specifies Windows PowerShell 5.1 parsing; that hosted CI job has not run yet.
+- Parsing all 19 rendered guest PowerShell helpers with official PowerShell 7.4.6 on Linux, whose archive was checked against the published SHA256. This checks syntax, not Windows cmdlet/runtime behavior. CI additionally parses helpers with Windows PowerShell 5.1; the [repository Actions page](https://github.com/rnguyen513/agent-kernel-lab/actions) records results for published commits.
+- Portable template-renderer regression coverage that blocks Linux-only modules to reproduce the Windows import boundary.
 - Deterministic source ZIP and release archive checks; rejection of symlinks, unexpected artifacts, private-key text and token-bearing download URLs in publication inputs. UTF-16 upstream INF templates are preserved byte-for-byte.
 
 The exact test count and archive digest are recorded in `docs/validation-results.json` and the release SHA256 sidecar. No fresh Windows installation or full VM restore was executed through the new portable package during this packaging task. The existing lab was left powered off. The new code does not import or take ownership of it.
