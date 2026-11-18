@@ -1,0 +1,26 @@
+name: Validate source
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  host:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install image validation tools
+        run: sudo apt-get update && sudo apt-get install -y qemu-utils
+      - name: Unit and local image integration tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Build source archive
+        run: python3 tools/release.py
+  powershell:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - name: Render portable guest helpers
+        run: python tools/render-guest.py --output local/rendered
+      - name: Parse with Windows PowerShell 5.1
+        shell: powershell
+        run: ./tools/check-powershell.ps1 -Directory local/rendered

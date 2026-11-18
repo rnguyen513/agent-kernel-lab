@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "profile": "reference-2026-11-18",
+  "note": "Reference media metadata, not automatic downloads. Supply local paths in your instance config. Windows/EWDK hashes are observed downloaded-byte hashes.",
+  "windows": {
+    "version": "Windows 11 Pro x64 en-US 26300.9457",
+    "url": "https://www.microsoft.com/software-download/windows11",
+    "sha256": "bd4307df32bc8af33b39ccecb1174aeb345386630f89a2b86c7a4e36b55ea650"
+  },
+  "ewdk": {
+    "version": "28000.3231",
+    "url": "https://download.microsoft.com/download/42228203-843f-451a-ad05-6d00871ce61f/EWDK_br_release_svc_prod1_28000_261009-2239.iso",
+    "sha256": "cc193f9c38930f56b12bd9c17f9ff62472b0733c3f33fa2a6b90ffec16fbd3d6",
+    "bytes": 19560370176
+  },
+  "openssh": {
+    "version": "10.4.0.0p1-Preview",
+    "preview": true,
+    "url": "https://github.com/PowerShell/Win32-OpenSSH/releases/download/10.4.0.0p1-Preview/OpenSSH-Win64.zip",
+    "sha256": "b67ff8becd203502190ec42ac7787c24c2cd3325ed7700485fe7a1c83d2a7957"
+  },
+  "sample": {
+    "repository": "https://github.com/microsoft/Windows-driver-samples",
+    "commit": "d49bb7d72f3651952b2b6e4ad28d14fe2247eb69",
+    "path": "general/echo/kmdf",
+    "license": "MS-PL"
+  }
+}

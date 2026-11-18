@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "release": "0.1.0",
+  "status": "research-preview",
+  "python_tests": {
+    "passed": 35,
+    "failed": 0,
+    "includes_real_qcow2_snapshot_restore": true
+  },
+  "libvirt": {
+    "version": "8.0.0",
+    "qemu": "6.2.0",
+    "dry_run_xml_validated": [
+      "dev",
+      "target",
+      "isolated",
+      "nat"
+    ],
+    "vm_definitions_changed": false
+  },
+  "powershell": {
+    "rendered_helpers_parsed": 19,
+    "parser": "7.4.6 Linux",
+    "parser_archive_sha256": "6f6015203c47806c5cc444c19d8ed019695e610fbd948154264bf9ca8e157561",
+    "windows_5_1_ci_executed": false
+  },
+  "example_source_matches_historical_tested_tree": true,
+  "portable_fresh_install_executed": false,
+  "portable_full_vm_restore_executed": false,
+  "existing_vms_started": false,
+  "repository_initialized": true,
+  "limitations_document": "VALIDATION.md",
+  "extracted_archive_tests_passed": 35,
+  "extracted_cli_init_smoke_test": "passed",
+  "publication_scan": "No original user/mount identifiers or private-key material; runtime directories excluded"
+}
